@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.DeviceSelect = new System.Windows.Forms.ComboBox();
             this.BtnConnect = new System.Windows.Forms.Button();
             this.rtbMsg = new System.Windows.Forms.RichTextBox();
@@ -38,6 +39,7 @@
             this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
             this.trayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.button1 = new System.Windows.Forms.Button();
             this.trayContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,34 +102,45 @@
             this.checkBox_start_mode.TabIndex = 9;
             this.checkBox_start_mode.Text = "下次最小化启动";
             this.checkBox_start_mode.UseVisualStyleBackColor = true;
-            //
+            // 
             // notifyIcon1
-            //
+            // 
             this.notifyIcon1.ContextMenuStrip = this.trayContextMenu;
-            this.notifyIcon1.Icon = System.Drawing.SystemIcons.Application;
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
             this.notifyIcon1.Text = "BLE TCP Bridge";
             this.notifyIcon1.Visible = true;
             this.notifyIcon1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon1_MouseClick);
-            //
+            // 
             // trayContextMenu
-            //
+            // 
             this.trayContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.tsmiExit});
             this.trayContextMenu.Name = "trayContextMenu";
             this.trayContextMenu.Size = new System.Drawing.Size(125, 26);
-            //
+            // 
             // tsmiExit
-            //
+            // 
             this.tsmiExit.Name = "tsmiExit";
             this.tsmiExit.Size = new System.Drawing.Size(124, 22);
             this.tsmiExit.Text = "退出程序";
             this.tsmiExit.Click += new System.EventHandler(this.tsmiExit_Click);
-            //
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(725, 0);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 10;
+            this.button1.Text = "退出程序";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // Form1
-            //
+            // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 578);
+            this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBox_start_mode);
             this.Controls.Add(this.label_ip_port);
             this.Controls.Add(this.label_connected_devices);
@@ -136,9 +149,9 @@
             this.Controls.Add(this.DeviceSelect);
             this.Name = "Form1";
             this.Text = "kjasdhbgvjkhreaubvuo";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Resize += new System.EventHandler(this.Form1_Resize);
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.trayContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -155,6 +168,7 @@
         private System.Windows.Forms.NotifyIcon notifyIcon1;
         private System.Windows.Forms.ContextMenuStrip trayContextMenu;
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
+        private System.Windows.Forms.Button button1;
     }
 }
 

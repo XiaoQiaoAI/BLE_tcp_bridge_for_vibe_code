@@ -404,5 +404,10 @@ namespace BLE_tcp_driver
                 this.WindowState = FormWindowState.Minimized;
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }
