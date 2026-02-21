@@ -164,6 +164,11 @@ namespace BLE_tcp_driver
                     break;
 
                 case PacketType.WriteCommand:
+                    // 记录状态信息
+                    if (ProtocolHelper.IsClaudeStatusUpload(data))
+                    {
+                        ProtocolHelper.LastClaudeState = data;
+                    }
                     if (_bleCore.CurrentWriteCharacteristic != null)
                     {
                         for (int i = 0; i < data.Count(); i += 20)

@@ -239,6 +239,14 @@ namespace BLE_tcp_driver
                         bleCore.CurrentWriteCharacteristic,
                         ProtocolHelper.DeviceStatusQueryCommand);
                     log(Color.Blue, "已发送设备状态查询指令");
+
+                    if (ProtocolHelper.LastClaudeState !=  null)
+                    {
+                        bleCore.WriteDataToCharacterstuc(
+                            bleCore.CurrentWriteCharacteristic,
+                            ProtocolHelper.LastClaudeState);
+                        log(Color.Blue, "已发送设置claude状态指令");
+                    }
                 }
             }));
         }

@@ -111,6 +111,8 @@ namespace BLE_tcp_driver
         /// </summary>
         public static readonly byte[] DeviceStatusQueryCommand = { 0xAA, 0xBB, 0x00, 0xCC, 0xDD };
 
+        public static byte[] LastClaudeState = null;
+
         /// <summary>
         /// 检查BLE通知数据是否为设备状态信息包
         /// 格式: [0xAA][0xBB][0x00][8字节设备信息][0xCC][0xDD] = 13字节
@@ -120,6 +122,15 @@ namespace BLE_tcp_driver
             if (data == null || data.Length != 13) return false;
             return data[0] == 0xAA && data[1] == 0xBB && data[2] == 0x00
                 && data[11] == 0xCC && data[12] == 0xDD;
+        }
+        /// <summary>
+        /// 检查数据是否是claude状态
+        /// 格式: [0xAA][0xBB][0x90]
+        /// </summary>
+        public static bool IsClaudeStatusUpload(byte[] data)
+        {
+            if (data == null) return false;
+            return data[0] == 0xAA && data[1] == 0xBB && data[2] == 0x90;
         }
 
         /// <summary>
