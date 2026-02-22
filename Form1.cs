@@ -4,6 +4,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
+using Microsoft.Win32;
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Bluetooth.GenericAttributeProfile;
 using Windows.Devices.Enumeration;
@@ -65,6 +66,11 @@ namespace BLE_tcp_driver
             // 同步checkbox
             checkBox_start_mode.Checked = config.StartMinimized;
             checkBox_start_mode.CheckedChanged += CheckBox_start_mode_CheckedChanged;
+
+            // 同步开机自启动 checkbox（先摘除 Designer 绑定的事件，避免初始化时误写注册表）
+            checkBox_follow_system.CheckedChanged -= checkBox_follow_system_CheckedChanged;
+            checkBox_follow_system.Checked = IsAutoStartEnabled();
+            checkBox_follow_system.CheckedChanged += checkBox_follow_system_CheckedChanged;
 
             // BLE事件
             bleCore.DeviceAdded += DeviceAdded;
@@ -408,6 +414,45 @@ namespace BLE_tcp_driver
         private void button1_Click(object sender, EventArgs e)
         {
             Application.Exit();
+        }
+
+        private void checkBox_follow_system_CheckedChanged(object sender, EventArgs e)
+        {
+            try
+            {
+                SetAutoStart(checkBox_follow_system.Checked);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("设置开机自启动失败: " + ex.Message, "错误", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                // 还原 checkbox 状态
+                checkBox_follow_system.CheckedChanged -= checkBox_follow_system_CheckedChanged;
+                checkBox_follow_system.Checked = !checkBox_follow_system.Checked;
+                checkBox_follow_system.CheckedChanged += checkBox_follow_system_CheckedChanged;
+            }
+        }
+
+        private const string AutoStartKeyName = "BLE_tcp_driver";
+
+        private bool IsAutoStartEnabled()
+        {
+            using (var key = Registry.CurrentUser.OpenSubKey(
+                @"Software\Microsoft\Windows\CurrentVersion\Run", false))
+            {
+                return key?.GetValue(AutoStartKeyName) != null;
+            }
+        }
+
+        private void SetAutoStart(bool enable)
+        {
+            using (var key = Registry.CurrentUser.OpenSubKey(
+                @"Software\Microsoft\Windows\CurrentVersion\Run", true))
+            {
+                if (enable)
+                    key.SetValue(AutoStartKeyName, Application.ExecutablePath);
+                else
+                    key.DeleteValue(AutoStartKeyName, false);
+            }
         }
     }
 }

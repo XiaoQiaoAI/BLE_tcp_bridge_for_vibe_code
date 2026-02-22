@@ -40,6 +40,7 @@
             this.trayContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tsmiExit = new System.Windows.Forms.ToolStripMenuItem();
             this.button1 = new System.Windows.Forms.Button();
+            this.checkBox_follow_system = new System.Windows.Forms.CheckBox();
             this.trayContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -135,11 +136,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // checkBox_follow_system
+            // 
+            this.checkBox_follow_system.AutoSize = true;
+            this.checkBox_follow_system.Location = new System.Drawing.Point(552, 81);
+            this.checkBox_follow_system.Name = "checkBox_follow_system";
+            this.checkBox_follow_system.Size = new System.Drawing.Size(96, 16);
+            this.checkBox_follow_system.TabIndex = 11;
+            this.checkBox_follow_system.Text = "跟随系统启动";
+            this.checkBox_follow_system.UseVisualStyleBackColor = true;
+            this.checkBox_follow_system.CheckedChanged += new System.EventHandler(this.checkBox_follow_system_CheckedChanged);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 578);
+            this.Controls.Add(this.checkBox_follow_system);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.checkBox_start_mode);
             this.Controls.Add(this.label_ip_port);
@@ -169,6 +182,7 @@
         private System.Windows.Forms.ContextMenuStrip trayContextMenu;
         private System.Windows.Forms.ToolStripMenuItem tsmiExit;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.CheckBox checkBox_follow_system;
     }
 }
 
