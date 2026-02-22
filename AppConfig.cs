@@ -18,7 +18,7 @@ namespace BLE_tcp_driver
         public bool HasSavedDevice => !string.IsNullOrEmpty(BleName) && !string.IsNullOrEmpty(BleMac);
 
         private static readonly string ConfigPath = Path.Combine(
-            Path.GetDirectoryName(Application.ExecutablePath), "config.json");
+            Path.GetDirectoryName(Application.ExecutablePath), "config_server.json");
 
         public static AppConfig Load()
         {
